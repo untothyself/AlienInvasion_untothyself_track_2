@@ -7,7 +7,7 @@ class Settings:
     def __init__(self) -> None:
         """Initialize the game's settings and asset paths."""
         # Screen settings
-        self.name: str = "Alien Invasion"
+        self.name: str = "The Hollow Watch - Track 2"
         self.screen_width: int = 1200
         self.screen_height: int = 800
         self.FPS: int = 60
@@ -18,24 +18,32 @@ class Settings:
         self.assets_dir: Path = self._find_existing_dir(["Assets", "assets"])
 
         self.bg_file: str = self._resolve_asset_path(
-            "images", ["Starbasesnow.png", "starbases_now.png", "starbasesnow.png"]
+    "images",
+    ["gothic_background.png"]
         )
+        self.middleground_file: str = self._resolve_asset_path(
+    "images",
+    ["gothic_town.png"]
+)
+
 
         # Ship settings
         self.ship_file: str = self._resolve_asset_path(
-            "images", ["ship.png", "ship2.png", "ship2(no bg).png", "ship_to_nob.png"]
-        )
-        self.ship_width: int = 60
-        self.ship_height: int = 40
+    "images",
+    ["watchman_sheet.png"]
+)
+        self.ship_width: int = 70
+        self.ship_height: int = 70
         self.ship_color: tuple[int, int, int] = (80, 180, 255)
         self.starting_ship_count: int = 3
 
         # Bullet settings
         self.bullet_file: str = self._resolve_asset_path(
-            "images", ["laserBlast.png", "laser_blast.png", "beams.png"]
-        )
-        self.bullet_width: int = 10
-        self.bullet_height: int = 30
+    "images",
+    ["light_bolt.png"]
+)
+        self.bullet_width: int = 16
+        self.bullet_height: int = 40
         self.bullet_amount: int = 5
         self.bullet_color: tuple[int, int, int] = (255, 230, 80)
 

@@ -1,3 +1,11 @@
+"""
+Program: The Hollow Watch - Track 2
+Author: Abass Hassan
+Purpose: Creates, updates, stores, and removes magic projectiles.
+Starter Code: Based on the Alien Invasion starter repository:
+https://github.com/RedBeard41/alien_Invasion_starter.git
+Date: July 26, 2026
+"""
 from typing import TYPE_CHECKING
 
 import pygame
@@ -12,6 +20,7 @@ class Arsenal:
     """Manage all bullets fired by the ship."""
 
     def __init__(self, ai_game: 'AlienInvasion') -> None:
+        """Initialize the projectile group and game references."""
         self.ai_game = ai_game
         self.settings = ai_game.settings
         self.bullets = pygame.sprite.Group()

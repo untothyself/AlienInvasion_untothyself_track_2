@@ -1,3 +1,11 @@
+"""
+Program: The Hollow Watch - Track 2
+Author: Abass Hassan
+Purpose: Stores game settings and handles paths for images, sounds, and data.
+Starter Code: Based on the Alien Invasion starter repository:
+https://github.com/RedBeard41/alien_Invasion_starter.git
+Date: July 26, 2026
+"""
 from pathlib import Path
 
 

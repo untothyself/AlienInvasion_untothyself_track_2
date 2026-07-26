@@ -1,3 +1,11 @@
+"""
+Program: The Hollow Watch - Track 2
+Author: Abass Hassan
+Purpose: Runs the game and manages events, collisions, and screen updates.
+Starter Code: Based on the Alien Invasion starter repository:
+https://github.com/RedBeard41/alien_Invasion_starter.git
+Date: July 26, 2026
+"""
 from time import sleep
 
 import pygame

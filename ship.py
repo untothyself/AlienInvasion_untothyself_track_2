@@ -17,7 +17,7 @@ class Ship(Sprite):
         ai_game: "AlienInvasion",
         arsenal: Arsenal,
     ) -> None:
-        """Initialize the watchman and place him at the bottom center."""
+        """Initialize the watchman at the bottom center of the screen."""
         super().__init__()
 
         self.screen = ai_game.screen
@@ -34,40 +34,23 @@ class Ship(Sprite):
         self.x: float = float(self.rect.x)
 
     def _load_image(self) -> pygame.Surface:
-        """Load one watchman frame or create a fallback player shape."""
+        """Load the watchman image or create a visible fallback shape."""
         size = (
             self.settings.ship_width,
             self.settings.ship_height,
         )
 
         try:
-            sprite_sheet = pygame.image.load(
+            image = pygame.image.load(
                 self.settings.ship_file
             ).convert_alpha()
 
-            # The watchman sheet contains three frames in one row.
-            frame_count = 3
-            frame_width = sprite_sheet.get_width() // frame_count
-            frame_height = sprite_sheet.get_height()
-
-            if frame_width <= 0 or frame_height <= 0:
-                raise ValueError("The watchman sprite sheet has an invalid size.")
-
-            first_frame = sprite_sheet.subsurface(
-                pygame.Rect(
-                    0,
-                    0,
-                    frame_width,
-                    frame_height,
-                )
-            ).copy()
-
             return pygame.transform.scale(
-                first_frame,
+                image,
                 size,
             )
 
-        except (FileNotFoundError, pygame.error, ValueError):
+        except (FileNotFoundError, pygame.error):
             fallback_image = pygame.Surface(
                 size,
                 pygame.SRCALPHA,
@@ -83,7 +66,7 @@ class Ship(Sprite):
             return fallback_image
 
     def update(self) -> None:
-        """Move the watchman and update his projectiles."""
+        """Move the watchman horizontally and update projectiles."""
         if self.moving_right:
             self.x += self.settings.ship_speed
 
@@ -91,6 +74,7 @@ class Ship(Sprite):
             self.x -= self.settings.ship_speed
 
         max_x = self.boundaries.right - self.rect.width
+
         self.x = max(
             0.0,
             min(self.x, float(max_x)),

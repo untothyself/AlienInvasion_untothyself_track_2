@@ -17,15 +17,24 @@ class AlienInvasion:
     def __init__(self) -> None:
         """Initialize pygame, the screen, game objects, and optional audio."""
         pygame.init()
+
         self.settings = Settings()
         self.clock = pygame.time.Clock()
+
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height)
+            (
+                self.settings.screen_width,
+                self.settings.screen_height,
+            )
         )
+
         pygame.display.set_caption(self.settings.name)
 
         self.bg = self._load_background()
+        self.middleground = self._load_middleground()
+
         self.running: bool = True
+
         self.impact_sound: pygame.mixer.Sound | None = None
         self.laser_sound: pygame.mixer.Sound | None = None
         self._initialize_audio()
@@ -36,26 +45,64 @@ class AlienInvasion:
         self.stats = GameStats(self)
         self.play_button = Button(self, "Play")
         self.hud = HUD(self)
+
         self.alien_fleet.create_fleet()
 
     def _load_background(self) -> pygame.Surface:
         """Load the background or create a plain fallback background."""
-        size = (self.settings.screen_width, self.settings.screen_height)
+        size = (
+            self.settings.screen_width,
+            self.settings.screen_height,
+        )
+
         try:
-            image = pygame.image.load(self.settings.bg_file).convert()
+            image = pygame.image.load(
+                self.settings.bg_file
+            ).convert()
+
             return pygame.transform.scale(image, size)
+
         except (FileNotFoundError, pygame.error):
-            image = pygame.Surface(size)
-            image.fill(self.settings.bg_color)
-            return image
+            fallback_background = pygame.Surface(size)
+            fallback_background.fill(self.settings.bg_color)
+
+            return fallback_background
+
+    def _load_middleground(self) -> pygame.Surface:
+        """Load the transparent Gothic town layer or create an empty layer."""
+        size = (
+            self.settings.screen_width,
+            self.settings.screen_height,
+        )
+
+        try:
+            image = pygame.image.load(
+                self.settings.middleground_file
+            ).convert_alpha()
+
+            return pygame.transform.scale(image, size)
+
+        except (FileNotFoundError, pygame.error):
+            empty_layer = pygame.Surface(
+                size,
+                pygame.SRCALPHA,
+            )
+            return empty_layer
 
     def _initialize_audio(self) -> None:
         """Load sounds when an audio device and sound files are available."""
         try:
             if not pygame.mixer.get_init():
                 pygame.mixer.init()
-            self.impact_sound = pygame.mixer.Sound(self.settings.impact_sound)
-            self.laser_sound = pygame.mixer.Sound(self.settings.laser_sound)
+
+            self.impact_sound = pygame.mixer.Sound(
+                self.settings.impact_sound
+            )
+
+            self.laser_sound = pygame.mixer.Sound(
+                self.settings.laser_sound
+            )
+
         except (FileNotFoundError, pygame.error):
             self.impact_sound = None
             self.laser_sound = None
@@ -78,27 +125,41 @@ class AlienInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self._quit_game()
+
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
+
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 self._check_play_button(event.pos)
 
-    def _check_play_button(self, mouse_pos: tuple[int, int]) -> None:
+    def _check_play_button(
+        self,
+        mouse_pos: tuple[int, int],
+    ) -> None:
         """Start a fresh game when the inactive Play button is clicked."""
-        if not self.play_button.check_clicked(mouse_pos) or self.stats.game_active:
+        if (
+            not self.play_button.check_clicked(mouse_pos)
+            or self.stats.game_active
+        ):
             return
 
         self.settings.initialize_dynamic_settings()
         self.stats.reset_stats()
         self.ship.center_ship()
         self._reset_level(level_up=False)
+
         self.stats.game_active = True
         self.hud.update_scores()
+
         pygame.mouse.set_visible(False)
 
-    def _check_keydown_events(self, event: pygame.event.Event) -> None:
+    def _check_keydown_events(
+        self,
+        event: pygame.event.Event,
+    ) -> None:
         """Respond to key presses."""
         if event.key == pygame.K_q:
             self._quit_game()
@@ -109,22 +170,36 @@ class AlienInvasion:
 
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
+
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+
         elif event.key == pygame.K_SPACE:
-            if self.ship.fire() and self.laser_sound is not None:
+            bullet_fired = self.ship.fire()
+
+            if bullet_fired and self.laser_sound is not None:
                 self.laser_sound.play()
 
-    def _check_keyup_events(self, event: pygame.event.Event) -> None:
+    def _check_keyup_events(
+        self,
+        event: pygame.event.Event,
+    ) -> None:
         """Stop movement when an arrow key is released."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
+
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
     def _update_screen(self) -> None:
         """Draw the current frame and make it visible."""
+        # Draw the mountain background.
         self.screen.blit(self.bg, (0, 0))
+
+        # Draw the transparent Gothic town over the mountains.
+        self.screen.blit(self.middleground, (0, 0))
+
+        # Draw the player, projectiles, enemies, and HUD.
         self.ship.draw()
         self.alien_fleet.draw()
         self.hud.draw_scores()
@@ -138,6 +213,7 @@ class AlienInvasion:
         """Close pygame and exit the program."""
         self.running = False
         pygame.quit()
+
         raise SystemExit
 
     def _ship_hit(self) -> None:
@@ -149,19 +225,26 @@ class AlienInvasion:
             self._reset_level(level_up=False)
             self.ship.center_ship()
             self.hud.update_scores()
+
             sleep(0.5)
             return
 
         self.stats.ships_left = 0
         self.stats.game_active = False
+
         self.arsenal.bullets.empty()
         self.ship.center_ship()
         self.hud.update_scores()
+
         pygame.mouse.set_visible(True)
 
     def _reset_level(self, level_up: bool = True) -> None:
         """Clear projectiles, rebuild the fleet, and optionally increase speed."""
-        self.stats.max_score = max(self.stats.max_score, self.stats.score)
+        self.stats.max_score = max(
+            self.stats.max_score,
+            self.stats.score,
+        )
+
         self.hud.check_high_score()
 
         if level_up:
@@ -169,7 +252,11 @@ class AlienInvasion:
 
         self.arsenal.bullets.empty()
         self.alien_fleet.fleet.empty()
-        self.alien_fleet.fleet_direction = self.settings.fleet_direction
+
+        self.alien_fleet.fleet_direction = (
+            self.settings.fleet_direction
+        )
+
         self.alien_fleet.create_fleet()
         self.ship.center_ship()
         self.hud.update_scores()
@@ -177,13 +264,21 @@ class AlienInvasion:
     def _check_collisions(self) -> None:
         """Handle bullet, alien, ship, and screen-bottom collisions."""
         collisions = pygame.sprite.groupcollide(
-            self.arsenal.bullets, self.alien_fleet.fleet, True, True
+            self.arsenal.bullets,
+            self.alien_fleet.fleet,
+            True,
+            True,
         )
 
         if collisions:
             if self.impact_sound is not None:
                 self.impact_sound.play()
-            destroyed_count = sum(len(aliens) for aliens in collisions.values())
+
+            destroyed_count = sum(
+                len(aliens)
+                for aliens in collisions.values()
+            )
+
             self.stats.score += destroyed_count * 10
             self.hud.update_scores()
 
@@ -192,12 +287,13 @@ class AlienInvasion:
             return
 
         ship_collided = any(
-    self.ship.rect.colliderect(alien.rect)
-    for alien in self.alien_fleet.fleet.sprites()
-)
+            self.ship.rect.colliderect(alien.rect)
+            for alien in self.alien_fleet.fleet.sprites()
+        )
 
         if ship_collided:
             self._ship_hit()
+
         elif self.alien_fleet.check_fleet_bottom():
             self._ship_hit()
 

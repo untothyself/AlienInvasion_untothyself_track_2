@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 class Settings:
-    """Store all static and changing settings for Alien Invasion."""
+    """Store all static and changing settings for The Hollow Watch."""
 
     def __init__(self) -> None:
         """Initialize the game's settings and asset paths."""
@@ -15,40 +15,49 @@ class Settings:
 
         # Project and asset folders
         self.base_dir: Path = Path(__file__).resolve().parent
-        self.assets_dir: Path = self._find_existing_dir(["Assets", "assets"])
-
-        self.bg_file: str = self._resolve_asset_path(
-    "images",
-    ["gothic_background.png"]
+        self.assets_dir: Path = self._find_existing_dir(
+            ["Assets", "assets"]
         )
-        self.middleground_file: str = self._resolve_asset_path(
-    "images",
-    ["gothic_town.png"]
-)
 
+        # Background assets
+        self.bg_file: str = self._resolve_asset_path(
+            "images",
+            ["gothic_background.png"],
+        )
+
+        self.middleground_file: str = self._resolve_asset_path(
+            "images",
+            ["gothic_town.png"],
+        )
 
         # Ship settings
         self.ship_file: str = self._resolve_asset_path(
-    "images",
-    ["watchman_sheet.png"]
-)
-        self.ship_width: int = 70
+            "images",
+            ["watchman.png"],
+        )       
+
+        self.ship_width: int = 52
         self.ship_height: int = 70
         self.ship_color: tuple[int, int, int] = (80, 180, 255)
         self.starting_ship_count: int = 3
 
         # Bullet settings
         self.bullet_file: str = self._resolve_asset_path(
-    "images",
-    ["light_bolt.png"]
-)
-        self.bullet_width: int = 16
-        self.bullet_height: int = 40
+            "images",
+            ["light_bolt.png"],
+        )
+
+        self.bullet_width: int = 10
+        self.bullet_height: int = 24
         self.bullet_amount: int = 5
         self.bullet_color: tuple[int, int, int] = (255, 230, 80)
 
         # Alien settings
-        self.alien_file: str = self._resolve_asset_path("images", ["enemy_4.png"])
+        self.alien_file: str = self._resolve_asset_path(
+            "images",
+            ["enemy_4.png"],
+        )
+
         self.alien_w: int = 40
         self.alien_h: int = 40
         self.alien_color: tuple[int, int, int] = (100, 230, 120)
@@ -56,10 +65,13 @@ class Settings:
 
         # Sound settings
         self.laser_sound: str = self._resolve_asset_path(
-            "sound", ["laser.mp3", "laser.wav"]
+            "sound",
+            ["laser.mp3", "laser.wav"],
         )
+
         self.impact_sound: str = self._resolve_asset_path(
-            "sound", ["impactSound.mp3", "impactSound.wav"]
+            "sound",
+            ["impactSound.mp3", "impactSound.wav"],
         )
 
         # Difficulty settings
@@ -74,7 +86,9 @@ class Settings:
         self.HUD_font_size: int = 20
 
         # Persistent score file
-        self.score_file: Path = self.assets_dir / "file" / "scores.json"
+        self.score_file: Path = (
+            self.assets_dir / "file" / "scores.json"
+        )
 
         self.initialize_dynamic_settings()
 
@@ -95,16 +109,24 @@ class Settings:
         """Return the first existing asset directory."""
         for name in candidates:
             path = self.base_dir / name
+
             if path.is_dir():
                 return path
+
         return self.base_dir / candidates[0]
 
-    def _resolve_asset_path(self, subfolder: str, candidates: list[str]) -> str:
-        """Return the first existing asset path, or the expected first path."""
+    def _resolve_asset_path(
+        self,
+        subfolder: str,
+        candidates: list[str],
+    ) -> str:
+        """Return the first existing asset path or its expected path."""
         folder = self.assets_dir / subfolder
+
         for name in candidates:
             candidate = folder / name
+
             if candidate.is_file():
                 return str(candidate)
+
         return str(folder / candidates[0])
-        

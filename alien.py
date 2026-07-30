@@ -27,6 +27,7 @@ class Alien(Sprite):
 
         self.image = self._load_image()
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self.x: float = x
         self.y: float = y
         self.rect.x = int(self.x)

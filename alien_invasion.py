@@ -270,41 +270,58 @@ class AlienInvasion:
         self.hud.update_scores()
 
     def _check_collisions(self) -> None:
-        """Handle bullet, alien, ship, and screen-bottom collisions."""
-        collisions = pygame.sprite.groupcollide(
-            self.arsenal.bullets,
-            self.alien_fleet.fleet,
-            True,
-            True,
-        )
-
-        if collisions:
-            if self.impact_sound is not None:
-                self.impact_sound.play()
-
-            destroyed_count = sum(
-                len(aliens)
-                for aliens in collisions.values()
-            )
-
-            self.stats.score += destroyed_count * 10
-            self.hud.update_scores()
+        """Handle projectile, enemy, watchman, and bottom collisions."""
+        self._check_projectile_enemy_collisions()
 
         if self.alien_fleet.check_destroyed_status():
             self._reset_level(level_up=True)
             return
 
-        ship_collided = any(
-            self.ship.rect.colliderect(alien.rect)
-            for alien in self.alien_fleet.fleet.sprites()
-        )
-
-        if ship_collided:
+        if self._check_enemy_watchman_collision():
             self._ship_hit()
-
         elif self.alien_fleet.check_fleet_bottom():
             self._ship_hit()
 
+    def _check_projectile_enemy_collisions(self) -> None:
+        """Remove projectiles and enemies whose visible pixels collide."""
+        collisions = pygame.sprite.groupcollide(
+            self.arsenal.bullets,
+            self.alien_fleet.fleet,
+            True,
+            True,
+            collided=pygame.sprite.collide_mask,
+        )
+
+        if not collisions:
+            return
+
+        if self.impact_sound is not None:
+            self.impact_sound.play()
+
+        destroyed_count = sum(
+            len(enemies)
+            for enemies in collisions.values()
+        )
+
+        self.stats.score += destroyed_count * 10
+        self.hud.update_scores()
+
+    def _check_enemy_watchman_collision(self) -> bool:
+        """Return True when an enemy visibly touches the watchman."""
+        for enemy in self.alien_fleet.fleet.sprites():
+            # Skip the more expensive mask check when rectangles do not touch.
+            if not self.ship.rect.colliderect(enemy.rect):
+                continue
+
+            offset = (
+                enemy.rect.left - self.ship.rect.left,
+                enemy.rect.top - self.ship.rect.top,
+            )
+
+            if self.ship.mask.overlap(enemy.mask, offset) is not None:
+                return True
+
+        return False
 
 if __name__ == "__main__":
     AlienInvasion().run_game()

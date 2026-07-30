@@ -27,6 +27,7 @@ class Bullet(Sprite):
 
         self.image = self._load_image()
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
 
         # Place the projectile directly above the player.
         self.rect.midbottom = ai_game.ship.rect.midtop

@@ -35,6 +35,7 @@ class Ship(Sprite):
 
         self.image = self._load_image()
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect.midbottom = self.boundaries.midbottom
 
         self.moving_right: bool = False

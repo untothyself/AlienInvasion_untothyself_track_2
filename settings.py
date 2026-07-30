@@ -63,11 +63,11 @@ class Settings:
         # Alien settings
         self.alien_file: str = self._resolve_asset_path(
             "images",
-            ["enemy_4.png"],
+            ["hollow_townsman.png"],
         )
 
-        self.alien_w: int = 40
-        self.alien_h: int = 40
+        self.alien_w: int = 48
+        self.alien_h: int = 60
         self.alien_color: tuple[int, int, int] = (100, 230, 120)
         self.fleet_drop_speed: int = 10
 

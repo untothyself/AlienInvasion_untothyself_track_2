@@ -86,11 +86,11 @@ class Settings:
         self.difficulty_scale: float = 1.05
 
         # Button and HUD settings
-        self.button_w: int = 200
-        self.button_h: int = 50
+        self.button_w: int = 285
+        self.button_h: int = 74
         self.button_color: tuple[int, int, int] = (0, 135, 0)
         self.text_color: tuple[int, int, int] = (255, 255, 255)
-        self.button_font_size: int = 48
+        self.button_font_size: int = 30
         self.HUD_font_size: int = 20
 
         # Custom font paths
@@ -109,6 +109,12 @@ class Settings:
         # Persistent score file
         self.score_file: Path = (
             self.assets_dir / "file" / "scores.json"
+        )
+
+        # Custom Play button image
+        self.play_button_file: str = self._resolve_asset_path(
+            "images",
+            ["play_button.png"],
         )
 
         self.initialize_dynamic_settings()

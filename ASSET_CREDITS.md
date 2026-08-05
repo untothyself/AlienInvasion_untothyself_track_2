@@ -47,3 +47,13 @@ Add the following information before the final submission:
 The projectile is stored at:
 
 `Assets/images/light_bolt.png`
+
+## Play Button
+
+- Asset pack: UI Pack RPG Expansion
+- Creator: Kenney Vleugels
+- License: Creative Commons CC0 1.0
+- Original file: `PNG/buttonLong_brown.png`
+- Project file: `Assets/images/play_button.png`
+- Changes made: Renamed and resized in Pygame for the Play button.
+- License file: `Assets/licenses/kenney-ui-rpg-license.txt`

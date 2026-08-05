@@ -93,6 +93,19 @@ class Settings:
         self.button_font_size: int = 48
         self.HUD_font_size: int = 20
 
+        # Custom font paths
+        self.font_dir: Path = (
+            self.assets_dir / "Fonts" / "Silkscreen"
+        )
+
+        self.hud_font_file: Path = (
+            self.font_dir / "Silkscreen-Regular.ttf"
+        )
+
+        self.button_font_file: Path = (
+            self.font_dir / "Silkscreen-Bold.ttf"
+        )
+
         # Persistent score file
         self.score_file: Path = (
             self.assets_dir / "file" / "scores.json"

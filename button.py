@@ -21,7 +21,10 @@ class Button:
         """Initialize the button's rectangle, font, and message."""
         self.screen = ai_game.screen
         self.settings = ai_game.settings
-        self.font = pygame.font.Font(None, self.settings.button_font_size)
+        self.font = pygame.font.Font(
+            str(self.settings.button_font_file),
+            self.settings.button_font_size,
+        )
         self.rect = pygame.Rect(
             0, 0, self.settings.button_w, self.settings.button_h
         )

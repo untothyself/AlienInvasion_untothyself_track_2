@@ -24,7 +24,10 @@ class HUD:
         self.screen = ai_game.screen
         self.stats = ai_game.stats
         self.settings = ai_game.settings
-        self.font = pygame.font.Font(None, self.settings.HUD_font_size)
+        self.font = pygame.font.Font(
+            str(self.settings.hud_font_file),
+            self.settings.HUD_font_size,
+        )
         self.score_file: Path = self.settings.score_file
 
         self._load_high_score()

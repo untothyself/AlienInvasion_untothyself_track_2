@@ -34,14 +34,34 @@ class Alien(Sprite):
         self.rect.y = int(self.y)
 
     def _load_image(self) -> pygame.Surface:
-        """Load the alien image or create a fallback alien shape."""
-        size = (self.settings.alien_w, self.settings.alien_h)
+        """Load the custom enemy image or create a fallback shape."""
+        size = (
+            self.settings.alien_w,
+            self.settings.alien_h,
+        )
+
         try:
-            image = pygame.image.load(self.settings.alien_file).convert_alpha()
-            return pygame.transform.scale(image, size)
+            image = pygame.image.load(
+                self.settings.alien_file
+            ).convert_alpha()
+
+            return pygame.transform.scale(
+                image,
+                size,
+            )
+
         except (FileNotFoundError, pygame.error):
-            image = pygame.Surface(size, pygame.SRCALPHA)
-            pygame.draw.ellipse(image, self.settings.alien_color, image.get_rect())
+            image = pygame.Surface(
+                size,
+                pygame.SRCALPHA,
+            )
+
+            pygame.draw.ellipse(
+                image,
+                self.settings.alien_color,
+                image.get_rect(),
+            )
+
             return image
 
     def check_edges(self) -> bool:

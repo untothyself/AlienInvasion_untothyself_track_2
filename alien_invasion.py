@@ -45,7 +45,18 @@ class AlienInvasion:
 
         self.impact_sound: pygame.mixer.Sound | None = None
         self.laser_sound: pygame.mixer.Sound | None = None
+
         self._initialize_audio()
+        self._start_background_music()
+
+        self.arsenal = Arsenal(self)
+        self.ship = Ship(self, self.arsenal)
+        self.alien_fleet = AlienFleet(self)
+        self.stats = GameStats(self)
+        self.play_button = Button(self, "Play")
+        self.hud = HUD(self)
+
+        self.alien_fleet.create_fleet()
 
         self.arsenal = Arsenal(self)
         self.ship = Ship(self, self.arsenal)
@@ -114,6 +125,23 @@ class AlienInvasion:
         except (FileNotFoundError, pygame.error):
             self.impact_sound = None
             self.laser_sound = None
+    
+    def _start_background_music(self) -> None:
+        """Load and continuously play the custom background music."""
+        try:
+            pygame.mixer.music.load(
+                self.settings.music_file
+            )
+
+            pygame.mixer.music.set_volume(
+                self.settings.music_volume
+            )
+
+            pygame.mixer.music.play(-1)
+
+        except (FileNotFoundError, pygame.error):
+            # Allow the game to continue without music.
+            pass
 
     def run_game(self) -> None:
         """Run the main game loop."""

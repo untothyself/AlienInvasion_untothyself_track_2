@@ -82,6 +82,14 @@ class Settings:
             ["impactSound.mp3", "impactSound.wav"],
         )
 
+        # Background music settings
+        self.music_file: str = self._resolve_asset_path(
+            "sound",
+            ["background_music.ogg"],
+        )
+
+        self.music_volume: float = 0.25
+
         # Difficulty settings
         self.difficulty_scale: float = 1.05
 

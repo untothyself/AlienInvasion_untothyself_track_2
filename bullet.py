@@ -5,6 +5,10 @@ Purpose: Represents and moves one magic light-bolt projectile.
 Starter Code: Based on the Alien Invasion starter repository:
 https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 26, 2026
+Projectile Asset: Light bolt from Pixel Art Spells by DevWizard.
+Asset Source: https://opengameart.org/content/pixel-art-spells
+License: Creative Commons Zero, CC0.
+Asset File: Assets/images/light_bolt.png
 """
 from typing import TYPE_CHECKING
 

@@ -46,20 +46,15 @@ The original artwork license is included at:
 
 ## Light Bolt Projectile
 
-The light-bolt credit must match the asset that was actually downloaded.
-
-Add the following information before the final submission:
-
-- Asset name
-- Creator
-- Original download page
-- License
-- File or frame used
-- Changes made
-
-The projectile is stored at:
-
-`Assets/images/light_bolt.png`
+- Asset pack: Pixel Art Spells
+- Asset: Light bolt
+- Creator: DevWizard
+- Source: https://opengameart.org/content/pixel-art-spells
+- License: Creative Commons Zero, CC0
+- Original download: `pixelart_spells.zip`
+- Project file: `Assets/images/light_bolt.png`
+- Changes made: The light-bolt sprite was selected, renamed, and resized in Pygame for use as the player projectile.
+- Attribution requirement: Not required, but credit to DevWizard is appreciated.
 
 ## Play Button
 
@@ -90,3 +85,13 @@ The projectile is stored at:
 - Project file: `Assets/sound/impactSound.wav`
 - Changes made: Converted to WAV and renamed for use when an enemy is destroyed.
 - License file: `Assets/licenses/kenney-impact-sounds-license.txt`
+
+## Background Music
+
+- Asset name: Whispers in the Fog
+- Creator: Ruhinre
+- Source: OpenGameArt
+- License: Creative Commons Zero, CC0 1.0
+- Original file: `whispers_in_the_fog.ogg`
+- Project file: `Assets/sound/background_music.ogg`
+- Changes made: Renamed and continuously looped in Pygame.

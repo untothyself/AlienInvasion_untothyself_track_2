@@ -74,12 +74,12 @@ class Settings:
         # Sound settings
         self.laser_sound: str = self._resolve_asset_path(
             "sound",
-            ["laser.mp3", "laser.wav"],
+            ["laser.wav"],
         )
 
         self.impact_sound: str = self._resolve_asset_path(
             "sound",
-            ["impactSound.mp3", "impactSound.wav"],
+            ["impactSound.wav"],
         )
 
         # Background music settings

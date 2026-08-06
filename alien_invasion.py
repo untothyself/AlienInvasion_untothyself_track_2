@@ -5,6 +5,8 @@ Purpose: Runs the game and manages events, collisions, and screen updates.
 Starter Code: Based on the Alien Invasion starter repository:
 https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 26, 2026
+Audio Assets: Digital Audio and Impact Sounds by Kenney, licensed CC0.
+Background Music: Whispers in the Fog by Ruhinre, licensed CC0.
 """
 from time import sleep
 
@@ -173,7 +175,12 @@ class AlienInvasion:
         ):
             return
 
-        self.settings.initialize_dynamic_settings()
+        # Reset dynamic game settings
+        self.settings.ship_speed = 5.0
+        self.settings.bullet_speed = 7.0
+        self.settings.alien_speed = 2.0
+        self.settings.fleet_direction = 1
+        
         self.stats.reset_stats()
         self.ship.center_ship()
         self._reset_level(level_up=False)

@@ -58,15 +58,6 @@ class AlienInvasion:
 
         self.alien_fleet.create_fleet()
 
-        self.arsenal = Arsenal(self)
-        self.ship = Ship(self, self.arsenal)
-        self.alien_fleet = AlienFleet(self)
-        self.stats = GameStats(self)
-        self.play_button = Button(self, "Play")
-        self.hud = HUD(self)
-
-        self.alien_fleet.create_fleet()
-
     def _load_background(self) -> pygame.Surface:
         """Load the background or create a plain fallback background."""
         size = (

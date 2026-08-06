@@ -176,10 +176,7 @@ class AlienInvasion:
             return
 
         # Reset dynamic game settings
-        self.settings.ship_speed = 5.0
-        self.settings.bullet_speed = 7.0
-        self.settings.alien_speed = 2.0
-        self.settings.fleet_direction = 1
+        self.settings.initialize_dynamic_settings()
         
         self.stats.reset_stats()
         self.ship.center_ship()

@@ -4,8 +4,12 @@ Author: Abass Hassan
 Purpose: Loads and displays the custom Play button image.
 Starter Code: Based on the Alien Invasion starter repository:
 https://github.com/RedBeard41/alien_Invasion_starter.git
-Asset: UI Pack RPG Expansion by Kenney, licensed under CC0.
-Date: August 5, 2026
+Button Asset: UI Pack RPG Expansion by Kenney.
+Original File: buttonLong_brown.png.
+Project File: Assets/images/play_button.png.
+License: Creative Commons CC0 1.0.
+Font: Silkscreen by Jason Kottke, licensed under the SIL Open Font License.
+Date: August 6, 2026
 """
 
 from typing import TYPE_CHECKING

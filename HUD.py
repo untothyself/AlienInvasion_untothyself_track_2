@@ -4,7 +4,10 @@ Author: Abass Hassan
 Purpose: Displays a custom Gothic HUD with score, high score, and lives.
 Starter Code: Based on the Alien Invasion starter repository:
 https://github.com/RedBeard41/alien_Invasion_starter.git
-Date: August 5, 2026
+Font: Silkscreen by Jason Kottke.
+License: SIL Open Font License 1.1.
+Font Files: Silkscreen-Regular.ttf and Silkscreen-Bold.ttf.
+Date: August 6, 2026
 """
 
 import json

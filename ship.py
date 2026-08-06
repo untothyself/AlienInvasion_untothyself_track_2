@@ -4,7 +4,10 @@ Author: Abass Hassan
 Purpose: Manages the Gothic watchman, movement, and projectile firing.
 Starter Code: Based on the Alien Invasion starter repository:
 https://github.com/RedBeard41/alien_Invasion_starter.git
-Date: July 26, 2026
+Asset: Gothicvania Town by Luis Zuno, also known as ansimuz.
+License: Public domain.
+Asset File: Assets/images/watchman.png
+Date: August 6, 2026
 """
 from typing import TYPE_CHECKING
 

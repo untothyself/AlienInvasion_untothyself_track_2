@@ -31,6 +31,19 @@ The original artwork license is included at:
 
 `Assets/licenses/gothicvania-license.txt`
 
+## Silkscreen Font
+
+- Font: Silkscreen
+- Creator: Jason Kottke
+- License: SIL Open Font License 1.1
+- Source: Official Silkscreen font page
+- Files used:
+  - `Assets/Fonts/Silkscreen/Silkscreen-Regular.ttf`
+  - `Assets/Fonts/Silkscreen/Silkscreen-Bold.ttf`
+- License file:
+  - `Assets/Fonts/Silkscreen/OFL.txt`
+- Changes made: Used for the HUD and Play button text.
+
 ## Light Bolt Projectile
 
 The light-bolt credit must match the asset that was actually downloaded.

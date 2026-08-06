@@ -70,3 +70,23 @@ The projectile is stored at:
 - Project file: `Assets/images/play_button.png`
 - Changes made: Renamed and resized in Pygame for the Play button.
 - License file: `Assets/licenses/kenney-ui-rpg-license.txt`
+
+## Magic Projectile Sound
+
+- Asset pack: Digital Audio
+- Creator: Kenney Vleugels
+- License: Creative Commons Zero, CC0 1.0
+- Original file: `Audio/zap1.ogg`
+- Project file: `Assets/sound/laser.wav`
+- Changes made: Converted to WAV and renamed for use as the magic projectile sound.
+- License file: `Assets/licenses/kenney-digital-audio-license.txt`
+
+## Enemy Impact Sound
+
+- Asset pack: Impact Sounds
+- Creator: Kenney
+- License: Creative Commons Zero, CC0 1.0
+- Original file: `Audio/impactBell_heavy_002.ogg`
+- Project file: `Assets/sound/impactSound.wav`
+- Changes made: Converted to WAV and renamed for use when an enemy is destroyed.
+- License file: `Assets/licenses/kenney-impact-sounds-license.txt`

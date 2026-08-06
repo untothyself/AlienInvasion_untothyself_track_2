@@ -31,6 +31,20 @@ The original artwork license is included at:
 
 `Assets/licenses/gothicvania-license.txt`
 
+## Hollowed Townsman Enemy
+
+- Asset pack: Gothicvania Town
+- Original asset: Old Man NPC
+- Creator: Luis Zuno
+- Creator name: Ansimuz
+- Source: https://ansimuz.itch.io/gothicvania-town
+- License: Creative Commons Zero, CC0 1.0 Universal
+- Original file: `PNG/spritesheets/oldman-idle.png`
+- Project file: `Assets/images/hollow_townsman.png`
+- Changes made: One frame from the Old Man idle animation was selected, cropped, renamed, and resized in Pygame for use as an enemy.
+- Attribution requirement: Credit is not required, but it is appreciated.
+- License file: `Assets/licenses/gothicvania-license.txt`
+
 ## Silkscreen Font
 
 - Font: Silkscreen

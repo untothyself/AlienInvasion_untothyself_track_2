@@ -4,7 +4,14 @@ Author: Abass Hassan
 Purpose: Represents and controls one enemy in the game.
 Starter Code: Based on the Alien Invasion starter repository:
 https://github.com/RedBeard41/alien_Invasion_starter.git
-Date: July 26, 2026
+Enemy Asset: Old Man NPC from Gothicvania Town.
+Creator: Luis Zuno, also known as Ansimuz.
+Asset Source: https://ansimuz.itch.io/gothicvania-town
+Original File: PNG/spritesheets/oldman-idle.png
+Project File: Assets/images/hollow_townsman.png
+License: Creative Commons Zero, CC0 1.0 Universal.
+Changes Made: One idle frame was selected, cropped, renamed, and resized.
+Date: August 6, 2026
 """
 from typing import TYPE_CHECKING
 
